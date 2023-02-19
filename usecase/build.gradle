@@ -6,6 +6,8 @@ plugins {
 }
 
 dependencies {
+    implementation "org.springframework.boot:spring-boot-starter:${spring_version}"
+
     implementation project(':port:input')
     implementation project(':port:output')
 }

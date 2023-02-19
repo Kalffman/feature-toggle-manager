@@ -11,6 +11,7 @@ dependencies {
 
     implementation project(":port:output")
     implementation "org.springframework.boot:spring-boot-starter-data-redis:${spring_version}"
+    implementation "redis.clients:jedis:${jedis_version}"
 }
 
 

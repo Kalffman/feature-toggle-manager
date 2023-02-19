@@ -1,5 +1,6 @@
 package com.kalffman.manager.kfeaturetogglemanager.config
 
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -15,9 +16,16 @@ class RedisConfig(
     private val redisPort: Int
 ) {
 
+    val logger = LoggerFactory.getLogger(RedisConfig::class.java)
+
     @Bean
-    fun jedisConnectionFactory(): JedisConnectionFactory{
-        return JedisConnectionFactory(RedisStandaloneConfiguration(redisHost, redisPort))
+    fun jedisConnectionFactory(): JedisConnectionFactory {
+        logger.info("m=jedisConnectionFactory, redisHost=$redisHost, redisPort=$redisPort")
+
+        return JedisConnectionFactory().apply {
+            this.hostName = redisHost
+            this.port = redisPort
+        }
     }
 
     @Bean
