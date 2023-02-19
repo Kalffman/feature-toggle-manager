@@ -1,0 +1,15 @@
+plugins {
+    id 'org.springframework.boot' version "${spring_version}"
+    id 'org.jetbrains.kotlin.jvm' version "${kotlin_version}"
+    id 'org.jetbrains.kotlin.plugin.spring' version "${kotlin_version}"
+}
+
+dependencies {
+    developmentOnly "org.springframework.boot:spring-boot-devtools:${spring_version}"
+
+    implementation project(':port:input')
+    implementation "org.springframework.boot:spring-boot-starter-web:${spring_version}"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:${jackson_module_kotlin}"
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+}

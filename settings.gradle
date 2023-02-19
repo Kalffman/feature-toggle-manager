@@ -1,0 +1,9 @@
+rootProject.name = 'KFeatureToggleManager'
+
+include 'app'
+include 'rest'
+include 'port:input'
+include 'port:output'
+include 'usecase'
+include 'adapter:output:postgres'
+include 'adapter:output:redis'
