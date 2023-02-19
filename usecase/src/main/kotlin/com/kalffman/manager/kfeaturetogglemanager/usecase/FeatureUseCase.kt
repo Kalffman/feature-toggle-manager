@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service
 @Service
 class FeatureUseCase(
     private val propagateChange: PropagateChange<FeatureOutputDTO>
-): ManageFeature {
+) : ManageFeature {
 
     val logger = LoggerFactory.getLogger(FeatureUseCase::class.java)
 
     override fun create(feature: FeatureInputDTO) {
-        logger.info("m=create, feature=${feature}")
+        logger.info("m=create, feature=$feature")
 
         propagateChange.propagate(feature.toOutputDTO())
     }
@@ -31,5 +31,4 @@ class FeatureUseCase(
     override fun delete(feature: FeatureInputDTO) {
         TODO("Not yet implemented")
     }
-
 }

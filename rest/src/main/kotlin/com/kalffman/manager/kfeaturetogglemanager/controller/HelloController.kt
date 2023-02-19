@@ -10,13 +10,14 @@ class HelloController(
     private val manageFeature: ManageFeature
 ) {
 
-
     @GetMapping("/")
     fun hello(): String {
-        manageFeature.create(FeatureInputDTO(
-            name = "CRUD_USUARIO_ADMIN",
-            description = "Feature p/ gerenciamento administrativo de usuáios"
-        ))
+        manageFeature.create(
+            FeatureInputDTO(
+                name = "CRUD_USUARIO_ADMIN",
+                description = "Feature p/ gerenciamento administrativo de usuáios"
+            )
+        )
         return "Hello"
     }
 }

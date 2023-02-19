@@ -7,5 +7,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 class KFeatureToggleManagerApplication
 
 fun main(args: Array<String>) {
-	SpringApplication.run(KFeatureToggleManagerApplication::class.java, *args)
+    SpringApplication.run(KFeatureToggleManagerApplication::class.java, *args)
 }

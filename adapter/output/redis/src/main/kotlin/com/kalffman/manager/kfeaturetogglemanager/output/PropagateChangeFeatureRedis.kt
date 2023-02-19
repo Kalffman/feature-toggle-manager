@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class PropagateChangeFeatureRedis(
     private val featureRepository: FeatureRepository
-): PropagateChange<FeatureOutputDTO> {
+) : PropagateChange<FeatureOutputDTO> {
 
     override fun propagate(entity: FeatureOutputDTO) {
         featureRepository.save(RFeature(entity))
