@@ -1,5 +1,16 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+	repositories {
+		maven {
+			url "https://repo.spring.io/plugins-snapshot"
+		}
+	}
+	dependencies {
+		classpath "io.spring.gradle:dependency-management-plugin:1.0.15.RELEASE"
+	}
+}
+
 plugins {
 	id 'io.spring.dependency-management' version '1.1.0'
 	id 'org.jetbrains.kotlin.jvm' version "${kotlin_version}"
@@ -8,11 +19,12 @@ plugins {
 
 allprojects {
 	apply plugin: 'org.jlleitschuh.gradle.ktlint'
+	apply plugin: 'io.spring.dependency-management'
 }
 
 subprojects {
 	group = 'com.kalffman.manager'
-	version = '0.0.1-SNAPSHOT'
+	version = 'SNAPSHOT'
 	sourceCompatibility = '17'
 
 	repositories {
@@ -23,6 +35,9 @@ subprojects {
 repositories {
 	mavenCentral()
 }
+
+sourceCompatibility = 17
+targetCompatibility = 17
 
 tasks.withType(KotlinCompile).configureEach {
 	kotlinOptions {

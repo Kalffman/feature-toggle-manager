@@ -26,3 +26,7 @@ ifeq ($(REDIS_CONTAINER_EXIST), false)
 else ifeq ($(REDIS_CONTAINER_RUNNING), false)
 	docker start $(DB_CONTAINER_NAME)
 endif
+
+
+docker_image:
+	docker build --no-cache -t kfeaturetogglemanager:local .
