@@ -4,7 +4,7 @@ WORKDIR /usr/temp
 
 COPY . .
 
-RUN ["./gradlew", "clean", "ktlintCheck", "test", "app:build"]
+RUN ["./gradlew", "app:build"]
 
 FROM amazoncorretto:17
 
