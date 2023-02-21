@@ -4,6 +4,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version "${kotlin_version}"
     id 'org.jetbrains.kotlin.plugin.spring' version "${kotlin_version}"
     id 'org.jetbrains.kotlin.plugin.jpa' version "${kotlin_version}"
+    id 'org.flywaydb.flyway' version "${flyway_version}"
 }
 
 dependencies {
@@ -15,3 +16,12 @@ dependencies {
 
     runtimeOnly "org.postgresql:postgresql:${postgresql_version}"
 }
+
+flyway {
+    url = "jdbc:postgresql://${System.getenv("DB_HOST")}:${System.getenv("DB_PORT")}/${System.getenv("DB_NAME")}"
+    user = System.getenv('DB_USER')
+    password = System.getenv('DB_PASSWORD')
+    locations = ["filesystem:${projectDir}/db/migration"]
+}
+
+apply plugin: "org.flywaydb.flyway"

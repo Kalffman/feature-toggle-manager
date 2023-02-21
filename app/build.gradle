@@ -13,4 +13,6 @@ dependencies {
     implementation project(':rest')
     implementation project(':usecase')
     implementation project(':adapter:output:redis')
+
+    
 }
