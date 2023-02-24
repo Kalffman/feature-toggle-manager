@@ -1,10 +1,5 @@
-package com.kalffman.manager.kfeaturetogglemanager.config
+package com.kalffman.manager.kfeaturetogglemanager.config.redis
 
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.core.JsonGenerator
-import com.fasterxml.jackson.core.JsonParser
-import com.fasterxml.jackson.databind.*
-import com.fasterxml.jackson.databind.ser.std.StringSerializer
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -13,17 +8,22 @@ import org.springframework.data.redis.connection.RedisPassword
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
-import org.springframework.data.redis.serializer.RedisSerializationContext
 import org.springframework.data.redis.serializer.StringRedisSerializer
-import java.time.Instant
 
 @Configuration
+@EnableRedisRepositories(basePackages = [
+    "com.kalffman.manager.kfeaturetogglemanager.entity.redis",
+    "com.kalffman.manager.kfeaturetogglemanager.repository.redis"
+])
 class RedisConfig(
     @Value("\${redis.host}")
     private val redisHost: String,
     @Value("\${redis.port}")
-    private val redisPort: Int
+    private val redisPort: Int,
+    @Value("\${redis.db}")
+    private val redisDb: Int,
 ) {
 
     val logger = LoggerFactory.getLogger(RedisConfig::class.java)
@@ -35,6 +35,7 @@ class RedisConfig(
         val config = RedisStandaloneConfiguration(redisHost, redisPort).apply {
             this.database = 0
             this.password = RedisPassword.none()
+            this.database = redisDb
         }
 //        return JedisConnectionFactory(config)
         return JedisConnectionFactory()

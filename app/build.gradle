@@ -8,11 +8,11 @@ dependencies {
     developmentOnly  "org.springframework.boot:spring-boot-devtools:${spring_version}"
 
     implementation "org.springframework.boot:spring-boot-starter:${spring_version}"
-    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
 
     implementation project(':rest')
     implementation project(':usecase')
     implementation project(':adapter:output:redis')
-
+    implementation project(':adapter:output:postgres')
     
 }

@@ -2,3 +2,12 @@
 redis:
   host: ${REDIS_HOST}
   port: ${REDIS_PORT}
+  db: ${REDIS_DB}
+
+postgres:
+  connection:
+    host: ${DB_HOST}
+    port: ${DB_PORT}
+    db: ${DB_NAME}
+    user: ${DB_USER}
+    password: ${DB_PASSWORD}
