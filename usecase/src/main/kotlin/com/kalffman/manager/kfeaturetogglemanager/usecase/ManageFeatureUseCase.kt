@@ -41,15 +41,23 @@ class ManageFeatureUseCase(
         }
     }
 
-    override fun retrieve(featureId: Long): IFeatureDTO {
-        TODO("Not yet implemented")
+    override fun retrieve(featureId: Long): IFeatureDTO? {
+        logger.info("c=ManageFeatureUseCase, m=retrieve, featureId=$featureId, status=started")
+
+        return readFeature.find(featureId)?.toInputDTO().also {
+            logger.info("c=ManageFeatureUseCase, m=retrieve, featureId=$featureId, status=finished")
+        }
     }
 
-    override fun retrieve(featureId: UUID): IFeatureDTO {
-        TODO("Not yet implemented")
+    override fun retrieve(featureId: UUID): IFeatureDTO? {
+        logger.info("c=ManageFeatureUseCase, m=retrieve, featureId=$featureId, status=started")
+
+        return readFeature.find(featureId)?.toInputDTO().also {
+            logger.info("c=ManageFeatureUseCase, m=retrieve, featureId=$featureId, status=finished")
+        }
     }
 
-    override fun update(feature: IFeatureDTO) {
+    override fun update(feature: IFeatureDTO): IFeatureDTO {
         TODO("Not yet implemented")
     }
 

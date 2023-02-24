@@ -18,44 +18,58 @@ class PostgresFeatureCRUD(
     private val logger = LoggerFactory.getLogger(PostgresFeatureCRUD::class.java)
 
     override fun create(feature: OFeatureDTO): OFeatureDTO {
-        logger.info("c=FeaturePostgresCRUD, m=create, status=started, feature=$feature")
+        logger.info("c=PostgresFeatureCRUD, m=create, status=started, feature=$feature")
 
         try {
             return postgresFeatureRepository.save(PostgresFeature(feature)).toFeatureOutputDTO().also {
-                logger.info("c=FeaturePostgresCRUD, m=create, status=finished, feature=$it")
+                logger.info("c=PostgresFeatureCRUD, m=create, status=finished, feature=$it")
             }
         } catch (ex: Exception) {
-            logger.error("c=FeaturePostgresCRUD, m=create, status=error, feature=$feature", ex)
+            logger.error("c=PostgresFeatureCRUD, m=create, status=error, feature=$feature", ex)
 
             throw ex
         }
     }
 
     override fun find(): List<OFeatureDTO> {
-        logger.info("c=FeaturePostgresCRUD, m=find, status=started")
+        logger.info("c=PostgresFeatureCRUD, m=find, status=started")
 
         try {
             return postgresFeatureRepository.findAll().map { it.toFeatureOutputDTO() }.also {
-                logger.info("c=FeaturePostgresCRUD, m=find, status=finished")
+                logger.info("c=PostgresFeatureCRUD, m=find, status=finished")
             }
         } catch (ex: Exception) {
-            logger.info("c=FeaturePostgresCRUD, m=find, status=error", ex)
+            logger.error("c=PostgresFeatureCRUD, m=find, status=error", ex)
 
             throw ex
         }
-
-        TODO("Not yet implemented")
     }
 
-    override fun find(id: Long): OFeatureDTO {
-        logger.info("c=FeaturePostgresCRUD, m=find, status=started, id=$id")
+    override fun find(id: Long): OFeatureDTO? {
+        logger.info("c=PostgresFeatureCRUD, m=find, status=started, id=$id")
 
-        TODO("Not yet implemented")
+        try {
+            return postgresFeatureRepository.findById(id).orElse(null)?.toFeatureOutputDTO().also {
+                logger.info("c=PostgresFeatureCRUD, m=find, status=finished, id=$id")
+            }
+        } catch (ex: Exception) {
+            logger.error("c=PostgresFeatureCRUD, m=find, status=started, id=$id", ex)
+
+            throw ex
+        }
     }
 
-    override fun find(id: UUID): OFeatureDTO {
-        logger.info("c=FeaturePostgresCRUD, m=find, status=started, id=$id")
+    override fun find(id: UUID): OFeatureDTO? {
+        logger.info("c=PostgresFeatureCRUD, m=find, status=started, id=$id")
 
-        TODO("Not yet implemented")
+        try {
+            return postgresFeatureRepository.findByExternalId(id).orElse(null)?.toFeatureOutputDTO().also {
+                logger.info("c=PostgresFeatureCRUD, m=find, status=started, id=$id")
+            }
+        } catch (ex: Exception) {
+            logger.error("c=PostgresFeatureCRUD, m=find, status=started, id=$id")
+            
+            throw ex
+        }
     }
 }

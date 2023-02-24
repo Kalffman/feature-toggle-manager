@@ -7,10 +7,8 @@ import java.util.UUID
 interface ManageFeature {
     fun create(feature: NewIFeatureDTO): IFeatureDTO
     fun retrieve(): List<IFeatureDTO>
-
-    fun retrieve(featureId: Long): IFeatureDTO
-
-    fun retrieve(featureId: UUID): IFeatureDTO
-    fun update(feature: IFeatureDTO)
+    fun retrieve(featureId: Long): IFeatureDTO?
+    fun retrieve(featureId: UUID): IFeatureDTO?
+    fun update(feature: IFeatureDTO): IFeatureDTO
     fun delete(feature: IFeatureDTO)
 }

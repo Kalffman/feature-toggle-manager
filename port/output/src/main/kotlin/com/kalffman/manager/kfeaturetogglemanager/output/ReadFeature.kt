@@ -6,8 +6,8 @@ import java.util.UUID
 interface ReadFeature {
     fun find(): List<OFeatureDTO>
 
-    fun find(id: Long): OFeatureDTO
+    fun find(id: Long): OFeatureDTO?
 
-    fun find(id: UUID): OFeatureDTO
+    fun find(id: UUID): OFeatureDTO?
 
 }
