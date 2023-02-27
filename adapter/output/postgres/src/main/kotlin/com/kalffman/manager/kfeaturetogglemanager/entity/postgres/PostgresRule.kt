@@ -1,6 +1,7 @@
 package com.kalffman.manager.kfeaturetogglemanager.entity.postgres
 
 import com.kalffman.manager.kfeaturetogglemanager.output.dto.OFeatureDTO
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -37,7 +38,10 @@ data class PostgresRule(
     @Enumerated(EnumType.STRING)
     @Column(name = "rule_composition_type")
     var ruleCompositionType: RuleCompositionType? = null,
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.ALL]
+    )
     @JoinColumn(name = "rule_composition_id", referencedColumnName = "id")
     var ruleComposition: PostgresRule? = null
 ) {

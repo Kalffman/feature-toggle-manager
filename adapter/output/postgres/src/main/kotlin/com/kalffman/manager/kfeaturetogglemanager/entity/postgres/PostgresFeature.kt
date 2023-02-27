@@ -1,6 +1,7 @@
 package com.kalffman.manager.kfeaturetogglemanager.entity.postgres
 
 import com.kalffman.manager.kfeaturetogglemanager.output.dto.OFeatureDTO
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -37,7 +38,7 @@ data class PostgresFeature(
     var created: LocalDateTime? = null,
     @Column(name = "last_update", nullable = false)
     var lastUpdate: LocalDateTime? = null,
-    @ManyToMany
+    @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(
         name = "feature_rule",
         schema = "feature_manager",
@@ -73,7 +74,7 @@ data class PostgresFeature(
 
     private fun validateFeature() {
         if (this.validAfter != null && this.validBefore != null) {
-            if (this.validAfter!!.isBefore(this.validBefore)) {
+            if (this.validAfter!!.isAfter(this.validBefore)) {
                 throw IllegalArgumentException("this.validAfter cannot be before this.validBefore")
             }
         }

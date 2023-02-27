@@ -1,10 +1,13 @@
 package com.kalffman.manager.kfeaturetogglemanager.controller.feature.v1
 
+import com.kalffman.manager.kfeaturetogglemanager.annotation.ValidateNewIFeatureDTO
 import com.kalffman.manager.kfeaturetogglemanager.input.ManageFeature
 import com.kalffman.manager.kfeaturetogglemanager.input.dto.IFeatureDTO
 import com.kalffman.manager.kfeaturetogglemanager.input.dto.NewIFeatureDTO
+import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -17,6 +20,7 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("/feature/v1")
+@Validated
 class FeatureController(
     private val manageFeature: ManageFeature
 ) {
@@ -24,6 +28,7 @@ class FeatureController(
 
     @PostMapping
     fun postFeature(
+        @Valid @ValidateNewIFeatureDTO
         @RequestBody
         dto: NewIFeatureDTO,
         uriComponentsBuilder: UriComponentsBuilder
