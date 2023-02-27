@@ -3,6 +3,7 @@ package com.kalffman.manager.kfeaturetogglemanager.output.redis
 import com.kalffman.manager.kfeaturetogglemanager.entity.redis.RedisFeature
 import com.kalffman.manager.kfeaturetogglemanager.output.PropagateChange
 import com.kalffman.manager.kfeaturetogglemanager.output.dto.OFeatureDTO
+import com.kalffman.manager.kfeaturetogglemanager.output.redis.exception.RedisLayerException
 import com.kalffman.manager.kfeaturetogglemanager.repository.redis.RedisFeatureRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
@@ -25,7 +26,7 @@ class PropagateChangeRedisFeature(
         } catch (ex: Exception) {
             logger.error("c=PropagateFeatureChange, m=propagate, status=error, entity=$entity", ex)
 
-            throw ex
+            throw RedisLayerException(ex.message, ex)
         }
     }
 }

@@ -1,6 +1,6 @@
-package com.kalffman.manager.kfeaturetogglemanager.input.exception
+package com.kalffman.manager.kfeaturetogglemanager.output.exception
 
-open class InputException(
+open class OutputException(
     layer: String? = null,
     message: String?,
     cause: Throwable

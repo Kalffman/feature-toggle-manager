@@ -1,6 +1,5 @@
 package com.kalffman.manager.kfeaturetogglemanager.config.postgres
 
-import com.kalffman.manager.kfeaturetogglemanager.output.postgres.PostgresFeatureCRUD
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -29,7 +28,7 @@ class PostgresConfig(val conn: PostgresConnectionProperties) {
 
     @Bean
     @Primary
-    fun dataSource(): DataSource {
+    fun postgresDataSource(): DataSource {
         logger.info("c=PostgresConfig, m=dataSource, conn=$conn")
 
         return DriverManagerDataSource().apply {
@@ -39,7 +38,6 @@ class PostgresConfig(val conn: PostgresConnectionProperties) {
             this.url = "jdbc:postgresql://${conn.host}:${conn.port}/${conn.db}"
         }
     }
-
 
     @Bean
     @Primary
@@ -52,12 +50,12 @@ class PostgresConfig(val conn: PostgresConnectionProperties) {
     @Bean
     @Primary
     fun postgresEntityManager(
-        dataSource: DataSource,
+        postgresDataSource: DataSource,
         extraPostgresProperties: Properties
     ): LocalContainerEntityManagerFactoryBean {
 
         return LocalContainerEntityManagerFactoryBean().apply {
-            this.dataSource = dataSource
+            this.dataSource = postgresDataSource
             this.jpaVendorAdapter = HibernateJpaVendorAdapter()
             this.setPackagesToScan("com.kalffman.manager.kfeaturetogglemanager.entity.postgres")
             this.setJpaProperties(extraPostgresProperties)
@@ -67,11 +65,10 @@ class PostgresConfig(val conn: PostgresConnectionProperties) {
     @Bean
     @Primary
     fun postgresTransactionManager(
-        entityManagerFactoryBean: LocalContainerEntityManagerFactoryBean
+        postgresEntityManager: LocalContainerEntityManagerFactoryBean
     ): PlatformTransactionManager {
         return JpaTransactionManager().apply {
-            entityManagerFactory = entityManagerFactoryBean.`object`
+            entityManagerFactory = postgresEntityManager.`object`
         }
     }
-
 }

@@ -4,11 +4,12 @@ import com.kalffman.manager.kfeaturetogglemanager.entity.postgres.PostgresFeatur
 import com.kalffman.manager.kfeaturetogglemanager.output.CreateFeature
 import com.kalffman.manager.kfeaturetogglemanager.output.ReadFeature
 import com.kalffman.manager.kfeaturetogglemanager.output.dto.OFeatureDTO
+import com.kalffman.manager.kfeaturetogglemanager.output.postgres.exception.PostgresLayerException
 import com.kalffman.manager.kfeaturetogglemanager.repository.postgres.PostgresFeatureRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.lang.Exception
-import java.util.*
+import java.util.UUID
 
 @Service
 class PostgresFeatureCRUD(
@@ -27,7 +28,7 @@ class PostgresFeatureCRUD(
         } catch (ex: Exception) {
             logger.error("c=PostgresFeatureCRUD, m=create, status=error, feature=$feature", ex)
 
-            throw ex
+            throw PostgresLayerException(ex.message, ex)
         }
     }
 
@@ -41,7 +42,7 @@ class PostgresFeatureCRUD(
         } catch (ex: Exception) {
             logger.error("c=PostgresFeatureCRUD, m=find, status=error", ex)
 
-            throw ex
+            throw PostgresLayerException(ex.message, ex)
         }
     }
 
@@ -55,7 +56,7 @@ class PostgresFeatureCRUD(
         } catch (ex: Exception) {
             logger.error("c=PostgresFeatureCRUD, m=find, status=started, id=$id", ex)
 
-            throw ex
+            throw PostgresLayerException(ex.message, ex)
         }
     }
 
@@ -68,8 +69,8 @@ class PostgresFeatureCRUD(
             }
         } catch (ex: Exception) {
             logger.error("c=PostgresFeatureCRUD, m=find, status=started, id=$id")
-            
-            throw ex
+
+            throw PostgresLayerException(ex.message, ex)
         }
     }
 }

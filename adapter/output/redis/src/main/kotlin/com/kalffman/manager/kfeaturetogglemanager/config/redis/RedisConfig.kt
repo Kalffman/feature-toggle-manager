@@ -13,10 +13,12 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
 import org.springframework.data.redis.serializer.StringRedisSerializer
 
 @Configuration
-@EnableRedisRepositories(basePackages = [
-    "com.kalffman.manager.kfeaturetogglemanager.entity.redis",
-    "com.kalffman.manager.kfeaturetogglemanager.repository.redis"
-])
+@EnableRedisRepositories(
+    basePackages = [
+        "com.kalffman.manager.kfeaturetogglemanager.entity.redis",
+        "com.kalffman.manager.kfeaturetogglemanager.repository.redis"
+    ]
+)
 class RedisConfig(
     @Value("\${redis.host}")
     private val redisHost: String,
@@ -37,8 +39,7 @@ class RedisConfig(
             this.password = RedisPassword.none()
             this.database = redisDb
         }
-//        return JedisConnectionFactory(config)
-        return JedisConnectionFactory()
+        return JedisConnectionFactory(config)
     }
 
     @Bean

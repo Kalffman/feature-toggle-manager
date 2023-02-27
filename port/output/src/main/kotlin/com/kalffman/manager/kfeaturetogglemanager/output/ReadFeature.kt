@@ -9,5 +9,4 @@ interface ReadFeature {
     fun find(id: Long): OFeatureDTO?
 
     fun find(id: UUID): OFeatureDTO?
-
 }

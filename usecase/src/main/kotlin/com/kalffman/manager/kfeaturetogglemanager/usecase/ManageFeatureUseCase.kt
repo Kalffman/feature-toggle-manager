@@ -4,13 +4,13 @@ import com.kalffman.manager.kfeaturetogglemanager.input.ManageFeature
 import com.kalffman.manager.kfeaturetogglemanager.input.dto.IFeatureDTO
 import com.kalffman.manager.kfeaturetogglemanager.input.dto.NewIFeatureDTO
 import com.kalffman.manager.kfeaturetogglemanager.output.CreateFeature
-import com.kalffman.manager.kfeaturetogglemanager.output.ReadFeature
 import com.kalffman.manager.kfeaturetogglemanager.output.PropagateChange
+import com.kalffman.manager.kfeaturetogglemanager.output.ReadFeature
 import com.kalffman.manager.kfeaturetogglemanager.output.dto.OFeatureDTO
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import java.util.*
+import java.util.UUID
 
 @Service
 class ManageFeatureUseCase(
