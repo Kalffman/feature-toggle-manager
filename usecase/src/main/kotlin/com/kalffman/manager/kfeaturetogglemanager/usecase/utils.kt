@@ -45,3 +45,26 @@ fun OFeatureDTO.Rule.toInputDTO(): IFeatureDTO.Rule = IFeatureDTO.Rule(
     this.composition?.toInputDTO(),
     this.compositionType
 )
+
+fun IFeatureDTO.toOutputDTO(): OFeatureDTO = OFeatureDTO(
+    this.id,
+    this.externalId,
+    this.name,
+    this.description,
+    this.enabled,
+    this.validAfter,
+    this.validBefore,
+    this.created,
+    this.lastUpdate,
+    this.rules?.map { it.toOutputDTO() }
+)
+
+fun IFeatureDTO.Rule.toOutputDTO(): OFeatureDTO.Rule = OFeatureDTO.Rule(
+    this.id,
+    this.field,
+    this.ruleType,
+    this.referenceValue,
+    this.operationType,
+    this.composition?.toOutputDTO(),
+    this.compositionType
+)

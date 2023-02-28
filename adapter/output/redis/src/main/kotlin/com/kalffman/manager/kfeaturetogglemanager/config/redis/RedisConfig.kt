@@ -39,7 +39,8 @@ class RedisConfig(
             this.password = RedisPassword.none()
             this.database = redisDb
         }
-        return JedisConnectionFactory(config)
+//        return JedisConnectionFactory(config)
+        return JedisConnectionFactory()
     }
 
     @Bean

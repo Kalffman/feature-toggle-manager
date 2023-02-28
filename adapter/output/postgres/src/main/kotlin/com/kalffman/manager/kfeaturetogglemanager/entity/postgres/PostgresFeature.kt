@@ -56,13 +56,14 @@ data class PostgresFeature(
         dto.enabled,
         dto.validAfter,
         dto.validBefore,
+        dto.created,
         rules = dto.rules?.map { PostgresRule(it) }
     )
     @PrePersist
     fun prePersist() {
         this.externalId = UUID.randomUUID()
         this.created = LocalDateTime.now()
-        this.lastUpdate = LocalDateTime.now()
+        this.lastUpdate = this.created
         validateFeature()
     }
 
@@ -75,7 +76,7 @@ data class PostgresFeature(
     private fun validateFeature() {
         if (this.validAfter != null && this.validBefore != null) {
             if (this.validAfter!!.isAfter(this.validBefore)) {
-                throw IllegalArgumentException("this.validAfter cannot be before this.validBefore")
+                throw IllegalArgumentException("validAfter cannot be after validBefore")
             }
         }
     }
