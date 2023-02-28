@@ -27,7 +27,7 @@ data class RedisFeature(
         val referenceValue: Map<String, Any>? = null,
         val operationType: String,
         val composition: RRule? = null,
-        val compositionTyoe: String? = null
+        val compositionType: String? = null
     ) {
         constructor(dto: OFeatureDTO.Rule) : this(
             dto.field,

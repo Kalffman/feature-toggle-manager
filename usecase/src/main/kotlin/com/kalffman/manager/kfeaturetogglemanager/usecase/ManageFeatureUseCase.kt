@@ -35,7 +35,7 @@ class ManageFeatureUseCase(
         }
 
         return featureCreated.toInputDTO().also {
-            logger.info("c=ManageFeatureUseCase, m=create, status=finished,feature=$it")
+            logger.debug("c=ManageFeatureUseCase, m=create, status=finished,feature=$it")
         }
     }
 
@@ -43,7 +43,7 @@ class ManageFeatureUseCase(
         logger.info("c=ManageFeatureUseCase, m=retrieve, status=started")
 
         return readFeature.find().map { it.toInputDTO() }.also {
-            logger.info("c=ManageFeatureUseCase, m=retrieve, status=finished")
+            logger.debug("c=ManageFeatureUseCase, m=retrieve, status=finished")
         }
     }
 
@@ -51,7 +51,7 @@ class ManageFeatureUseCase(
         logger.info("c=ManageFeatureUseCase, m=retrieve, status=started, featureId=$featureId")
 
         return readFeature.find(featureId)?.toInputDTO()?.also {
-            logger.info("c=ManageFeatureUseCase, m=retrieve, status=finished, featureId=${it.id}")
+            logger.debug("c=ManageFeatureUseCase, m=retrieve, status=finished, featureId=${it.id}")
         }
     }
 
@@ -59,12 +59,12 @@ class ManageFeatureUseCase(
         logger.info("c=ManageFeatureUseCase, m=retrieve, status=started, featureId=$featureId")
 
         return readFeature.find(featureId)?.toInputDTO()?.also {
-            logger.info("c=ManageFeatureUseCase, m=retrieve, status=finished, featureId=${it.externalId}")
+            logger.debug("c=ManageFeatureUseCase, m=retrieve, status=finished, featureId=${it.externalId}")
         }
     }
 
     override fun update(id: Long, changes: UpdateIFeatureDTO): IFeatureDTO {
-        logger.info("c=ManageFeatureUseCase, m=update, status=started, id=$id,  changes=$changes")
+        logger.info("c=ManageFeatureUseCase, m=update, status=started, id=$id, changes=$changes")
 
         val featFound = retrieve(id) ?: throw InputException("usecase", "Feature not exist")
 
@@ -77,7 +77,7 @@ class ManageFeatureUseCase(
         )
 
         return updateFeature.update(featToUpdate.toOutputDTO()).toInputDTO().also {
-            logger.info("c=ManageFeatureUseCase, m=update, status=started, feature=$it")
+            logger.debug("c=ManageFeatureUseCase, m=update, status=finished, id=$id, changes=$it")
         }
     }
 
@@ -95,7 +95,7 @@ class ManageFeatureUseCase(
         )
 
         return updateFeature.update(featToUpdate.toOutputDTO()).toInputDTO().also {
-            logger.info("c=ManageFeatureUseCase, m=update, status=started, feature=$it")
+            logger.debug("c=ManageFeatureUseCase, m=update, status=finished, id=${it.id}, changes=$it")
         }
     }
 
@@ -103,7 +103,7 @@ class ManageFeatureUseCase(
         logger.info("c=ManageFeatureUseCase, m=delete, status=started, feature=$feature")
 
         deleteFeature.delete(feature.toOutputDTO()).also {
-            logger.info("c=ManageFeatureUseCase, m=delete, status=finished")
+            logger.debug("c=ManageFeatureUseCase, m=delete, status=finished")
         }
     }
 

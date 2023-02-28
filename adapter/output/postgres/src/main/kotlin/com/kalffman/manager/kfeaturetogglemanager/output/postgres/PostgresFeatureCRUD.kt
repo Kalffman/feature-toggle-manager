@@ -26,7 +26,7 @@ class PostgresFeatureCRUD(
 
         try {
             return postgresFeatureRepository.saveAndFlush(PostgresFeature(feature)).toFeatureOutputDTO().also {
-                logger.info("c=PostgresFeatureCRUD, m=create, status=finished, feature=$it")
+                logger.debug("c=PostgresFeatureCRUD, m=create, status=finished, feature=$it")
             }
         } catch (ex: Exception) {
             logger.error("c=PostgresFeatureCRUD, m=create, status=error, feature=$feature", ex)
@@ -40,7 +40,7 @@ class PostgresFeatureCRUD(
 
         try {
             return postgresFeatureRepository.findAll().map { it.toFeatureOutputDTO() }.also {
-                logger.info("c=PostgresFeatureCRUD, m=find, status=finished")
+                logger.debug("c=PostgresFeatureCRUD, m=find, status=finished")
             }
         } catch (ex: Exception) {
             logger.error("c=PostgresFeatureCRUD, m=find, status=error", ex)
@@ -54,7 +54,7 @@ class PostgresFeatureCRUD(
 
         try {
             return postgresFeatureRepository.findById(id).orElse(null)?.toFeatureOutputDTO().also {
-                logger.info("c=PostgresFeatureCRUD, m=find, status=finished, id=$id")
+                logger.debug("c=PostgresFeatureCRUD, m=find, status=finished, id=$id")
             }
         } catch (ex: Exception) {
             logger.error("c=PostgresFeatureCRUD, m=find, status=error, id=$id", ex)
@@ -68,7 +68,7 @@ class PostgresFeatureCRUD(
 
         try {
             return postgresFeatureRepository.findByExternalId(id).orElse(null)?.toFeatureOutputDTO().also {
-                logger.info("c=PostgresFeatureCRUD, m=find, status=finished, id=$id")
+                logger.debug("c=PostgresFeatureCRUD, m=find, status=finished, id=$id")
             }
         } catch (ex: Exception) {
             logger.error("c=PostgresFeatureCRUD, m=find, status=error, id=$id", ex)
@@ -83,7 +83,7 @@ class PostgresFeatureCRUD(
 
         try {
             return postgresFeatureRepository.save(PostgresFeature(feature)).toFeatureOutputDTO().also {
-                logger.info("c=PostgresFeatureCRUD, m=update, status=finished, feature=$feature")
+                logger.debug("c=PostgresFeatureCRUD, m=update, status=finished, feature=$feature")
             }
         } catch (ex: Exception) {
             logger.error("c=PostgresFeatureCRUD, m=update, status=error, feature=$feature", ex)
@@ -98,7 +98,7 @@ class PostgresFeatureCRUD(
 
         try {
             postgresFeatureRepository.delete(PostgresFeature(feature)).also {
-                logger.info("c=PostgresFeatureCRUD, m=delete, status=finished, feature=$feature")
+                logger.debug("c=PostgresFeatureCRUD, m=delete, status=finished, feature=$feature")
             }
         } catch (ex: Exception) {
             logger.error("c=PostgresFeatureCRUD, m=delete, status=error, feature=$feature", ex)

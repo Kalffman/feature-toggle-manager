@@ -21,7 +21,7 @@ class PropagateChangeRedisFeature(
 
         try {
             redisFeatureRepository.save(RedisFeature(entity)).also {
-                logger.info("c=PropagateFeatureChange, m=propagate, status=finished, entity=$it")
+                logger.debug("c=PropagateFeatureChange, m=propagate, status=finished, entity=$it")
             }
         } catch (ex: Exception) {
             logger.error("c=PropagateFeatureChange, m=propagate, status=error, entity=$entity", ex)
