@@ -17,4 +17,4 @@ logging:
     console: UTF-8
     file: UTF-8
   file:
-    name: ktmanager-${IMAGE_VERSION}.log
+    name: app.log

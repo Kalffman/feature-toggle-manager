@@ -29,7 +29,7 @@ class PostgresConfig(val conn: PostgresConnectionProperties) {
     @Bean
     @Primary
     fun postgresDataSource(): DataSource {
-        logger.info("c=PostgresConfig, m=dataSource, conn=$conn")
+        logger.debug("c=PostgresConfig, m=dataSource, conn=$conn")
 
         return DriverManagerDataSource().apply {
             this.setDriverClassName("org.postgresql.Driver")
