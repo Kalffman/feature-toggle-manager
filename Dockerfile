@@ -14,6 +14,15 @@ COPY --from=BUILD /usr/temp/app/build/libs/app-SNAPSHOT.jar app.jar
 
 ENV REDIS_HOST localhost
 ENV REDIS_PORT 6397
+ENV REDIS_DB 0
+
+ENV DB_HOST localhost
+ENV DB_PORT 5432
+ENV DB_NAME db_name
+ENV DB_USER db_user
+ENV DB_PASSWORD db_pass
+
+ENV IMAGE_VERSION 00000000
 
 EXPOSE 8080
 

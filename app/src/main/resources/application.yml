@@ -11,3 +11,10 @@ postgres:
     db: ${DB_NAME}
     user: ${DB_USER}
     password: ${DB_PASSWORD}
+
+logging:
+  charset:
+    console: UTF-8
+    file: UTF-8
+  file:
+    name: ktmanager-${IMAGE_VERSION}.log
