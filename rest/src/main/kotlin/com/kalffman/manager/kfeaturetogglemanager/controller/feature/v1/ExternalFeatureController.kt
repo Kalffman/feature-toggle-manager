@@ -27,7 +27,6 @@ class ExternalFeatureController(
 ) {
     private val logger = LoggerFactory.getLogger(ExternalFeatureController::class.java)
 
-
     @GetMapping("/{id}")
     fun getFeatureByExternalId(@PathVariable id: UUID): ResponseEntity<IFeatureDTO> {
         logger.info("c=FeatureController, m=getAllFeature, status=started")
