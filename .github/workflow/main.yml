@@ -1,0 +1,22 @@
+name: Test branch main and stage
+on:
+  pull_request:
+    type: [closed]
+    branches:
+      - main
+      - stage
+      - dev
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+      - name: Tests
+        run: make app_tests
