@@ -6,6 +6,9 @@ on:
       - main
       - stage
       - dev
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: Kalffman/{{ gihub.repository }}
 
 jobs:
   test:
@@ -13,10 +16,22 @@ jobs:
     if: github.event.pull_request.merged == true
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Java
         uses: actions/setup-java@v2
         with:
           java-version: '17'
       - name: Tests
         run: make app_tests
+  tag:
+    needs: test
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Create Tag
+        run: |
+          VERSION=$(./gradlew properties -q | grep "^version:" | awk '{print $2}')
+          git tag -a $VERSION -m "[$VERSION]"
+          git push origin $VERSION
